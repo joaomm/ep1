@@ -29,9 +29,9 @@ escolhe_maior_altura_e_chama_uniao(ListaDePares1, ListaDePares2, Resultado) ->
 	[Primeiro2 | Resto2] = ListaDePares2,
 	{_, Altura2} = Primeiro2,
 	[{_, AlturaUltimo} | _ ] = Resultado,
-	case Altura2 > AlturaUltimo of
-		true -> uniao_recursiva(Resto1, Resto2, [Primeiro2 | Resultado]);
-		false -> uniao_recursiva(Resto1, Resto2, Resultado)
+	case Altura2 == AlturaUltimo of
+		true -> uniao_recursiva(Resto1, Resto2, Resultado);
+		false -> uniao_recursiva(Resto1, Resto2, [Primeiro2 | Resultado])
 	end.
 	
 	

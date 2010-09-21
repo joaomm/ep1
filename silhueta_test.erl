@@ -27,5 +27,6 @@ uniao_grudados_e_mesma_altura_test_() ->
 
 uniao_grudados_com_alturas_diferentes_test() ->
 	[
-		?assertEqual(silhueta:uniao([{0, 1}, {1, 0}], [{1, 2}, {2, 0}]), [{0, 1}, {1, 2}, {2, 0}])
+		?assertEqual(silhueta:uniao([{0, 1}, {1, 0}], [{1, 2}, {2, 0}]), [{0, 1}, {1, 2}, {2, 0}]),
+		?assertEqual(silhueta:uniao([{0, 3}, {1, 0}], [{1, 2}, {2, 0}]), [{0, 3}, {1, 2}, {2, 0}])
 	].
