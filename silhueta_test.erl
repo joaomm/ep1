@@ -25,19 +25,3 @@ uniao_grudados_e_mesma_altura_test_() ->
 		?_assert(silhueta:uniao([{0, 2},{2, 0}], [{2, 2}, {3, 0}]) == [{0, 2}, {3, 0}])		
 	].
 
-uniao_grudados_com_alturas_diferentes_test_() ->
-	[
-		?_assert(silhueta:uniao([{0, 1}, {1, 0}], [{1, 2}, {2, 0}]) == [{0, 1}, {1, 2}, {2, 0}])
-	].
-	
-uniao_de_duas_silhuetas_identicas_test_() ->
-	[
-		?_assert(silhueta:uniao([{0, 1}, {1, 0}], [{0, 1}, {1, 0}]) == [{0, 1}, {1, 0}])
-	].
-	
-uniao_com_sobreposicao_total_test_() ->
-	[
-		?_assert(silhueta:uniao([{0, 1}, {1, 0}], [{0, 1}, {2, 0}]) == [{0, 1}, {2, 0}]),
-		?_assert(silhueta:uniao([{0, 1}, {2, 0}], [{0, 1}, {1, 0}]) == [{0, 1}, {2, 0}]),
-		?_assert(silhueta:uniao([{0, 1}, {1, 0}], [{0, 1}, {3, 0}]) == [{0, 1}, {3, 0}])
-	].

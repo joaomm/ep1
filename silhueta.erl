@@ -4,21 +4,22 @@
 silhueta_de_edificio({Esq, Alt, Dir}) ->
 	[{Esq,Alt}, {Dir,0}].
 
+uniao(ListaDePares1, ListaDePares2) ->
+	uniao_recursiva(ListaDePares1, ListaDePares2, []).
 
-uniao([{Esq1, Alt1}, {Dir1, _}], [{Dir1, Alt1}, {Dir2, _}]) ->
-	[{Esq1, Alt1}, {Dir2, 0}];
+uniao_recursiva([], ListaDePares2, Resultado) ->
+	lists:reverse(Resultado) ++ ListaDePares2;
 
-uniao([{Esq1, Alt1}, {Dir1, _}], [{Dir1, Alt2}, {Dir2, _}]) ->
-	[{Esq1, Alt1}, {Dir1, Alt2}, {Dir2, 0}];
-
-uniao(ListaDePares, ListaDePares) ->
-	ListaDePares;
-
-uniao([{Esq, _}, {Dir1, _}], [{Esq, _}, {Dir2, 0}]) ->
-	case Dir1 < Dir2 of
-		true -> [{0, 1}, {Dir2, 0}];
-		false -> [{0, 1}, {Dir1, 0}]
-	end;
-
-uniao([Par1, Par2], [Par3, Par4]) ->
-		[Par1, Par2, Par3, Par4].
+uniao_recursiva(ListaDePares1, ListaDePares2, Resultado) ->
+	[Primeiro1 | Resto1] = ListaDePares1,
+	[Primeiro2 | Resto2] = ListaDePares2,
+	case compara(Primeiro1, Primeiro2) of
+		x_do_primeiro_mais_a_esquerda -> uniao_recursiva(Resto1, ListaDePares2, [Primeiro1 | Resultado]);
+		x_igual -> uniao_recursiva(Resto1, Resto2, Resultado)
+	end.
+	
+compara({X1, Alt1}, {X2, Alt2}) ->
+	case X1 < X2 of
+		true -> x_do_primeiro_mais_a_esquerda;
+		false -> x_igual
+	end.
