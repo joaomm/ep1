@@ -1,6 +1,6 @@
-compile: uniao.beam operacao.beam algoritmo1.beam algoritmo2.beam fold.beam imprimir.beam silhueta.beam
+compile: uniao.beam operacao.beam algoritmo1.beam algoritmo2.beam fold.beam imprimir.beam silhueta.beam ler.beam
 
-all_tests: operacao_test uniao_test algoritmo1_test algoritmo2_test fold_test imprimir_test
+all_tests: operacao_test uniao_test algoritmo1_test algoritmo2_test fold_test imprimir_test ler_test
 
 operacao_test: operacao_compile
 	erl -noshell -s operacao_test test -s init stop
@@ -68,6 +68,18 @@ imprimir.beam: imprimir.erl
 
 imprimir_test.beam: imprimir_test.erl
 	erlc imprimir_test.erl
+
+ler_test: operacao_compile ler_compile
+	erl -noshell -s ler_test test -s init stop
+	rm entrada_teste.in
+
+ler_compile: ler.beam ler_test.beam algoritmo1.beam
+
+ler.beam: ler.erl
+	erlc ler.erl
+
+ler_test.beam: ler_test.erl
+	erlc ler_test.erl
 
 silhueta_compile: silhueta.beam
 
