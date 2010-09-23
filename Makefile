@@ -57,11 +57,11 @@ fold.beam: fold.erl
 fold_test.beam: fold_test.erl
 	erlc fold_test.erl
 
-imprimir_test: operacao_compile imprimir_compile
+imprimir_test: imprimir_compile
 	erl -noshell -s imprimir_test test -s init stop
 	rm saida_teste.out
 
-imprimir_compile: imprimir.beam imprimir_test.beam algoritmo1.beam
+imprimir_compile: imprimir.beam imprimir_test.beam 
 
 imprimir.beam: imprimir.erl
 	erlc imprimir.erl
@@ -69,11 +69,11 @@ imprimir.beam: imprimir.erl
 imprimir_test.beam: imprimir_test.erl
 	erlc imprimir_test.erl
 
-ler_test: operacao_compile ler_compile
+ler_test: ler_compile
 	erl -noshell -s ler_test test -s init stop
 	rm entrada_teste.in
 
-ler_compile: ler.beam ler_test.beam algoritmo1.beam
+ler_compile: ler.beam ler_test.beam
 
 ler.beam: ler.erl
 	erlc ler.erl
