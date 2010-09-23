@@ -1,9 +1,6 @@
-run: compile
-	erl -noshell -s silhueta main 1
+compile: uniao.beam operacao.beam algoritmo1.beam algoritmo2.beam fold.beam imprimir.beam silhueta.beam
 
 all_tests: operacao_test uniao_test algoritmo1_test algoritmo2_test fold_test imprimir_test
-
-compile: uniao_compile operacao_compile algoritmo1_compile algoritmo2_compile fold_compile imprimir_compile silhueta_compile
 
 operacao_test: operacao_compile
 	erl -noshell -s operacao_test test -s init stop

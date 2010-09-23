@@ -1,0 +1,24 @@
+Dupla:
+	João Machini de Miranda
+	Pedro Morhy Borges Leal
+	
+Como compilar:
+	$> make
+
+Como executar:
+	$> erl -noshell -s silhueta main [algoritmo] [arquivo-entrada] [arquivo-silhueta] [arquivo-imagem]
+	A ordem do argumentos é importante e deve ser usada como o enunciado especifica.
+
+Como rodar todos os testes:
+	$> make all_tests
+	
+Sobre as funções obrigatórias:
+	Para deixar o código um pouco mais organizado, dividimos o programa em vários módulos.
+	O módulo silhueta só faz chamadas para os módulos e funções apropriados.
+	O código de cada função obrigatório está localizado como mostrado abaixo:
+		algoritmo1 				-> modulo algoritmo1
+		algoritmo2 				-> modulo algoritmo2
+		silhueta_com_foldr 		-> modulo fold
+		silhueta_com_foldl 		-> modulo fold
+		uniao					-> modulo operacao
+		silhueta_de_edificio 	-> modulo operacao
