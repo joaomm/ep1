@@ -17,14 +17,14 @@ silhueta_com_foldr(Edificios) ->
 	io:format("Utilizando Algoritmo Silhueta com FoldR~n"),
 	fold:silhueta_com_foldr(Edificios).
 	
-main([Algoritmo, _Entrada, Saida]) ->
-	Edificios = [{12, 7, 16}, {2, 6, 7}, {1, 11, 5}, {24, 4, 28}, {3, 13, 9}, {19, 18, 22}, {23, 13, 29}, {14, 3, 25}],
+main([Algoritmo, Entrada, Saida]) ->
+	Edificios = ler:edificios(Entrada),
 	Silhueta = apply(escolhe_algoritmo(Algoritmo), [Edificios]),
 	imprimir:silhueta(Saida, Silhueta),
 	init:stop();
 
-main([Algoritmo, _Entrada]) ->
-	main([Algoritmo, _Entrada, stdout]);
+main([Algoritmo, Entrada]) ->
+	main([Algoritmo, Entrada, stdout]);
 
 main([Algoritmo]) ->
 	main([Algoritmo, stdin, stdout]);
