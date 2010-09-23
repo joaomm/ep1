@@ -3,7 +3,7 @@
 
 imprimir_lista_no_arquivo_com_tamanho_zero_test() ->
 	Lista = [],
-	imprimir:lista("saida_teste.out", Lista),
+	imprimir:silhueta("saida_teste.out", Lista),
 	{ok, S} = file:open("saida_teste.out", read),
 	
 	?assertEqual(io:get_line(S, ''), "0\n"),
@@ -12,7 +12,7 @@ imprimir_lista_no_arquivo_com_tamanho_zero_test() ->
 
 imprimir_lista_no_arquivo_com_tamanho_um_test() ->
 	Lista = [{1,0}],
-	imprimir:lista("saida_teste.out", Lista),
+	imprimir:silhueta("saida_teste.out", Lista),
 	{ok, S} = file:open("saida_teste.out", read),
 	
 	?assertEqual(io:get_line(S, ''), "1\n"),
@@ -22,7 +22,7 @@ imprimir_lista_no_arquivo_com_tamanho_um_test() ->
 
 imprimir_lista_no_arquivo_com_tamanho_maior_que_um_test() ->
 	Lista = [{1,0}, {2,3}, {4,6}, {9, 0}],
-	imprimir:lista("saida_teste.out", Lista),
+	imprimir:silhueta("saida_teste.out", Lista),
 	{ok, S} = file:open("saida_teste.out", read),
 	
 	?assertEqual(io:get_line(S, ''), "4\n"),

@@ -1,4 +1,9 @@
+run: compile
+	erl -noshell -s silhueta main 1
+
 all_tests: operacao_test uniao_test algoritmo1_test algoritmo2_test fold_test imprimir_test
+
+compile: uniao_compile operacao_compile algoritmo1_compile algoritmo2_compile fold_compile imprimir_compile silhueta_compile
 
 operacao_test: operacao_compile
 	erl -noshell -s operacao_test test -s init stop
@@ -57,6 +62,7 @@ fold_test.beam: fold_test.erl
 
 imprimir_test: operacao_compile imprimir_compile
 	erl -noshell -s imprimir_test test -s init stop
+	rm saida_teste.out
 
 imprimir_compile: imprimir.beam imprimir_test.beam algoritmo1.beam
 
@@ -65,6 +71,11 @@ imprimir.beam: imprimir.erl
 
 imprimir_test.beam: imprimir_test.erl
 	erlc imprimir_test.erl
+
+silhueta_compile: silhueta.beam
+
+silhueta.beam: silhueta.erl
+	erlc silhueta.erl
 
 clean:
 	rm -f *.beam
