@@ -70,9 +70,36 @@ escolhe_maior_altura_e_chama_uniao(ListaDePares1, ListaDePares2, Resultado, _) -
 	end.
 
 lista_com_maior_altura(ListaDePares1, ListaDePares2) ->
-	[{_, Alt1} | _] = ListaDePares1,
-	[{_, Alt2} | _] = ListaDePares2,
-	case Alt1 < Alt2 of
+	[{_, Alt1} | Resto1] = ListaDePares1,
+	[{_, Alt2} | Resto2] = ListaDePares2,
+	case compara_alturas(Alt1, Alt2) of
+		primeira_maior -> {ListaDePares1, ListaDePares2};
+		segunda_maior -> {ListaDePares2, ListaDePares1};
+		iguais -> compara_comprimento_do_segundo_elemento({ListaDePares1, Resto1}, {ListaDePares2, Resto2})
+	end.
+
+compara_alturas(Alt1, Alt2) when Alt1 == Alt2 ->
+	iguais;
+	
+compara_alturas(Alt1, Alt2) when Alt1 < Alt2 ->
+	segunda_maior;
+
+compara_alturas(Alt1, Alt2) when Alt1 > Alt2 ->
+	primeira_maior.
+
+compara_comprimento_do_segundo_elemento({ListaDePares1, []}, {ListaDePares2, []}) ->
+	{ListaDePares1, ListaDePares2};
+	
+compara_comprimento_do_segundo_elemento({ListaDePares1, []}, {ListaDePares2, [_ | _]}) ->
+	{ListaDePares2, ListaDePares1};
+
+compara_comprimento_do_segundo_elemento({ListaDePares1, [_ | _]}, {ListaDePares2, []}) ->
+	{ListaDePares1, ListaDePares2};
+
+compara_comprimento_do_segundo_elemento({ListaDePares1, Resto1}, {ListaDePares2, Resto2}) ->
+	[{X1, _} | _] = Resto1,
+	[{X2, _} | _] = Resto2,
+	case X1 < X2 of
 		true -> {ListaDePares2, ListaDePares1};
 		false -> {ListaDePares1, ListaDePares2}
 	end.
