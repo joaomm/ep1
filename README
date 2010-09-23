@@ -11,6 +11,9 @@ Como executar:
 
 Como rodar todos os testes:
 	$> make all_tests
+
+Como limpar os .beam:
+	&> make clean
 	
 Sobre as funções obrigatórias:
 	Para deixar o código um pouco mais organizado, dividimos o programa em vários módulos.
