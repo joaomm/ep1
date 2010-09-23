@@ -1,4 +1,4 @@
-all_tests: operacao_test uniao_test algoritmo1_test algoritmo2_test fold_test
+all_tests: operacao_test uniao_test algoritmo1_test algoritmo2_test fold_test imprimir_test
 
 operacao_test: operacao_compile
 	erl -noshell -s operacao_test test -s init stop
@@ -55,6 +55,16 @@ fold.beam: fold.erl
 fold_test.beam: fold_test.erl
 	erlc fold_test.erl
 
+imprimir_test: operacao_compile imprimir_compile
+	erl -noshell -s imprimir_test test -s init stop
+
+imprimir_compile: imprimir.beam imprimir_test.beam algoritmo1.beam
+
+imprimir.beam: imprimir.erl
+	erlc imprimir.erl
+
+imprimir_test.beam: imprimir_test.erl
+	erlc imprimir_test.erl
 
 clean:
 	rm -f *.beam
