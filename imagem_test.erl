@@ -59,3 +59,61 @@ imprimir_imagem_pgm_com_alguns_elementos_test() ->
 	?assertEqual(io:get_line(S, ''), "0 0 0 \n"),
 	file:close(S).
 
+%
+gerar_matriz_para_imagem_com_nenhum_desenho_test() ->
+	SilhuetaVazia = [],
+	Matriz = imagem:gerar_matriz(SilhuetaVazia),
+	{Linhas, Colunas, _A} = Matriz,
+
+	?assertEqual(Linhas, 600),
+	?assertEqual(Colunas, 800),
+  todos_elementos_devem_estar_com_maxval(Matriz),
+	verificar_base(Matriz).
+
+%0  16 16 16
+%0  16 16 16
+%0  10 16 16
+%0  0  0  0
+
+todos_elementos_devem_estar_com_maxval(Matriz) ->
+	{Linhas, _, _} = Matriz,
+	verificar_linha_toda_e_chamar_proxima(Linhas, Matriz, 16).
+
+verificar_base(Matriz) ->
+	{MaxLinhas, _, _} = Matriz,
+	verificar_linha_toda(1, Matriz, 0),
+	verificar_primeira_coluna(MaxLinhas, Matriz, 0).
+
+verificar_primeira_coluna(0, _, _) ->
+	ok;
+
+verificar_primeira_coluna(Linha, Matriz, Valor) ->
+	{MaxLinhas, _, _} = Matriz,
+	ValorAtual = matrix:get(MaxLinhas-Linha, 0, Matriz),
+	?assertEqual(Valor, ValorAtual),
+	verificar_primeira_coluna(Linha-1,Matriz, Valor).
+
+verificar_linha_toda_e_chamar_proxima(1, _, _) ->
+	ok;
+
+verificar_linha_toda_e_chamar_proxima(Linha, Matriz, Valor) ->
+	verificar_linha_toda(Linha, Matriz, Valor),
+	verificar_linha_toda_e_chamar_proxima(Linha-1,Matriz, Valor).
+
+verificar_linha_toda(Linha, Matriz, Valor) ->
+	{_, Colunas, _} = Matriz,
+	verificar_cada_elemento(Linha, Colunas-1, Matriz, Valor).
+
+verificar_cada_elemento(_, 0, _, _) ->
+	ok;
+
+verificar_cada_elemento(Linha, Coluna, Matriz, Valor) ->
+	{MaxLinhas, MaxColunas, _} = Matriz,
+	ValorAtual = matrix:get(MaxLinhas - Linha, MaxColunas - Coluna, Matriz),
+	?assertEqual(Valor, ValorAtual),
+	verificar_cada_elemento(Linha, Coluna-1, Matriz, Valor).
+%
+
+
+
+
