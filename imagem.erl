@@ -1,6 +1,16 @@
 -module(imagem).
 -export([nova/2, gerar_matriz/1]).
 
+%n_lins() -> 600.                      % número de linhas da imagem
+%n_cols() -> 800.                      % número de colunas da imagem
+%borda_inf() -> n_lins() - 1.          % borda inferior (última linha da imagem) 
+%margem_inf() -> 20.                   % linhas do eixo base à borda inferior da imagem
+%base() -> borda_inf() - margem_inf(). % linha do eixo base 
+   
+branco() -> 16.                       % valor de maxval
+cinza() -> 10.                        % cor da silhueta preenchida
+preto() -> 0.                         % cor do eixo base
+
 gerar_matriz(Silhueta) ->
 	Matriz = matrix:new(600, 800),
 	MatrizCompleta = preencher_colunas_recursivamente(Silhueta, 0, 0, Matriz),
@@ -25,8 +35,8 @@ nova_silhueta_e_altura(Silhueta, AlturaAtual, Coluna) ->
 	end.
 
 preencher_coluna(Coluna, Altura, Matriz) ->
-	MatrizNova = preencher_elementos_da_coluna_recursivamente(0, 599-Altura, Coluna, Matriz, 16),
-	preencher_elementos_da_coluna_recursivamente(599-Altura, 599, Coluna, MatrizNova, 10).
+	MatrizNova = preencher_elementos_da_coluna_recursivamente(0, 599-Altura, Coluna, Matriz, branco()),
+	preencher_elementos_da_coluna_recursivamente(599-Altura, 599, Coluna, MatrizNova, cinza()).
 
 preencher_elementos_da_coluna_recursivamente(Linha, Linha, _, Matriz, _) ->
 	Matriz;
@@ -42,7 +52,7 @@ preencher_base(Matriz) ->
 
 preencher_ultima_linha(Matriz) ->
 	{_, MaxColunas, _} = Matriz,
-	preencher_cada_elemento(1, MaxColunas, Matriz, 0).
+	preencher_cada_elemento(1, MaxColunas, Matriz, preto()).
 
 preencher_primeira_coluna(0, Matriz) ->
 	Matriz;

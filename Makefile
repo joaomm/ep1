@@ -1,4 +1,4 @@
-compile: uniao.beam operacao.beam algoritmo1.beam algoritmo2.beam fold.beam imprimir.beam silhueta.beam ler.beam imagem.beam
+compile: uniao.beam operacao.beam algoritmo1.beam algoritmo2.beam fold.beam imprimir.beam silhueta.beam ler.beam matrix.beam imagem.beam
 
 all_tests: operacao_test uniao_test algoritmo1_test algoritmo2_test fold_test imprimir_test ler_test imagem_test
 
@@ -85,7 +85,7 @@ imagem_test: imagem_compile
 	erl -noshell -s imagem_test test -s init stop
 	rm imagem_test.pgm
 
-imagem_compile: imagem.beam imagem_test.beam
+imagem_compile: matrix.beam imagem.beam imagem_test.beam
 
 imagem.beam: imagem.erl
 	erlc imagem.erl

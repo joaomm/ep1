@@ -87,10 +87,6 @@ gerar_matriz_para_imagem_com_dois_pares_de_silhueta_test() ->
 	?assertEqual(0, matrix:get(599,3, Matriz)),
 
 	?assertEqual(0, matrix:get(598,0, Matriz)).
-%0  16 16 16
-%0  16 16 16
-%0  10 10 16
-%0  0  0  0
 
 todos_elementos_devem_estar_com_maxval(Matriz) ->
 	{Linhas, _, _} = Matriz,
