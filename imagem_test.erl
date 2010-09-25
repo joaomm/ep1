@@ -70,9 +70,26 @@ gerar_matriz_para_imagem_com_nenhum_desenho_test() ->
   todos_elementos_devem_estar_com_maxval(Matriz),
 	verificar_base(Matriz).
 
+gerar_matriz_para_imagem_com_dois_pares_de_silhueta_test() ->
+	Silhueta = [{0,1}, {2, 0}],
+	Matriz = imagem:gerar_matriz(Silhueta),
+	?assertEqual(10, matrix:get(598,1, Matriz)),
+	?assertEqual(10, matrix:get(598,2, Matriz)),
+
+	?assertEqual(16, matrix:get(597,1, Matriz)),
+	?assertEqual(16, matrix:get(597,2, Matriz)),
+	?assertEqual(16, matrix:get(597,3, Matriz)),
+	?assertEqual(16, matrix:get(598,3, Matriz)),
+
+	?assertEqual(0, matrix:get(599,0, Matriz)),
+	?assertEqual(0, matrix:get(599,1, Matriz)),
+	?assertEqual(0, matrix:get(599,2, Matriz)),
+	?assertEqual(0, matrix:get(599,3, Matriz)),
+
+	?assertEqual(0, matrix:get(598,0, Matriz)).
 %0  16 16 16
 %0  16 16 16
-%0  10 16 16
+%0  10 10 16
 %0  0  0  0
 
 todos_elementos_devem_estar_com_maxval(Matriz) ->
@@ -82,16 +99,15 @@ todos_elementos_devem_estar_com_maxval(Matriz) ->
 verificar_base(Matriz) ->
 	{MaxLinhas, _, _} = Matriz,
 	verificar_linha_toda(1, Matriz, 0),
-	verificar_primeira_coluna(MaxLinhas, Matriz, 0).
+	verificar_primeira_coluna(MaxLinhas, Matriz).
 
-verificar_primeira_coluna(0, _, _) ->
+verificar_primeira_coluna(0, _) ->
 	ok;
 
-verificar_primeira_coluna(Linha, Matriz, Valor) ->
+verificar_primeira_coluna(Linha, Matriz) ->
 	{MaxLinhas, _, _} = Matriz,
-	ValorAtual = matrix:get(MaxLinhas-Linha, 0, Matriz),
-	?assertEqual(Valor, ValorAtual),
-	verificar_primeira_coluna(Linha-1,Matriz, Valor).
+	?assertEqual(0, matrix:get(MaxLinhas-Linha, 0, Matriz)),
+	verificar_primeira_coluna(Linha-1,Matriz).
 
 verificar_linha_toda_e_chamar_proxima(1, _, _) ->
 	ok;
