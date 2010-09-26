@@ -6,14 +6,20 @@ Como compilar:
 	$> make
 
 Como executar:
-	$> erl -noshell -s silhueta main [algoritmo] [arquivo-entrada] [arquivo-silhueta] [arquivo-imagem]
+	$> erl -noshell -s silhueta main [algoritmo] [arquivo-entrada] [arquivo-silhueta] [arquivo-imagem.pgm]
 	A ordem do argumentos é importante e deve ser usada como o enunciado especifica.
+	ex:
+		$> erl -noshell -s silhueta main 2 entrada.txt saida.txt imagem.pgm
 
 Como rodar todos os testes:
 	$> make all_tests
 
 Como limpar os .beam:
 	&> make clean
+
+Arquivo de entrada:
+	Assumimos que as entradas estarão devidamente formatadas, sem espaços adicionais entre os números e linhas em branco, por exemplo.
+
 	
 Sobre as funções obrigatórias:
 	Para deixar o código um pouco mais organizado, dividimos o programa em vários módulos.
